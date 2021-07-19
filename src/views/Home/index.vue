@@ -10,6 +10,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+h1{
+  background-color: @xtxColor;
+  // 鼠标移入添加阴影
+  .hoverShadow();
+}
 </style>
