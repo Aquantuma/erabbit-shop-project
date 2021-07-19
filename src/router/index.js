@@ -1,20 +1,11 @@
+// 解构出创建路由的函数
+// createRouter           -   用于创建路由的
+// createWebHashHistory   -   哈希路由模式
+// createWebHistory       -   History模式
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
+// 路由配置 - 映射关系表
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
 ]
 
 const router = createRouter({
