@@ -4,8 +4,20 @@
 // createWebHistory       -   History模式
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+import Layout from '@/views/Layout'
+import Home from '@/views/Home'
 // 路由配置 - 映射关系表
 const routes = [
+  {
+    path: '/',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        component: Home
+      }
+    ]
+  }
 ]
 
 const router = createRouter({
