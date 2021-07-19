@@ -1,6 +1,9 @@
 // 同理，解构出创建Vuex仓库的函数
 import { createStore } from 'vuex'
 
+// 引入vuex持久化插件
+import createPersistedstate from 'vuex-persistedstate'
+
 // 引入vuex子模块
 import user from './modules/user'
 import cart from './modules/cart'
@@ -24,5 +27,11 @@ export default createStore({
   },
   // Vuex的计算属性
   getters: {
-  }
+  },
+  plugins: [
+    createPersistedstate({
+      key: 'erabbit-client-pc-store',
+      paths: ['user', 'cart']
+    })
+  ]
 })
