@@ -1,6 +1,6 @@
 <template>
   <div class="xtx-home-page">
-      <h1>主页的内容</h1>
+      <h1>主页的内容<i class="iconfont icon-backtop"></i></h1>
   </div>
 </template>
 
