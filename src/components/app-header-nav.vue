@@ -1,36 +1,34 @@
 <template>
   <ul class="navs">
     <li class="home"><RouterLink to="/">首页</RouterLink></li>
-    <li>
-      <a href="#">美食</a>
+    <li v-for="item in list" :key="item.id">
+      <a href="#">{{ item.name }}</a>
       <div class="layer">
         <ul>
-          <li v-for="i in 10" :key="i">
+          <li v-for="value in item.children" :key="value.id">
             <a href="#">
-              <img
-                src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/img/category%20(4).png"
-                alt=""
-              />
-              <p>果干</p>
+              <img :src="value.picture" alt="" />
+              <p>{{ value.name }}</p>
             </a>
           </li>
         </ul>
       </div>
     </li>
-    <li><a href="#">餐厨</a></li>
-    <li><a href="#">艺术</a></li>
-    <li><a href="#">电器</a></li>
-    <li><a href="#">居家</a></li>
-    <li><a href="#">洗护</a></li>
-    <li><a href="#">孕婴</a></li>
-    <li><a href="#">服装</a></li>
-    <li><a href="#">杂货</a></li>
   </ul>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
-  name: 'AppHeaderNav'
+  name: 'AppHeaderNav',
+  setup () {
+    const store = useStore()
+    const list = computed(() => {
+      return store.state.category.list
+    })
+    return { list }
+  }
 }
 </script>
 
