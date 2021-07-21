@@ -13,17 +13,20 @@
 
 <script>
 import AppHeaderNav from './app-header-nav'
-import { onMounted, ref } from 'vue'
+// import { onMounted, ref } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
 export default {
   name: 'AppHeaderSticky',
   components: { AppHeaderNav },
   setup () {
-    const y = ref(0)
-    onMounted(() => {
-      window.onscroll = () => {
-        y.value = document.documentElement.scrollTop
-      }
-    })
+    // const y = ref(0)
+    // onMounted(() => {
+    //   window.onscroll = () => {
+    //     y.value = document.documentElement.scrollTop
+    //   }
+    // })
+    // ✨这里解构出来的y还是响应式数据，可以直接在页面中使用
+    const { y } = useWindowScroll()
     return { y }
   }
 }
