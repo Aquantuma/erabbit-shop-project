@@ -11,5 +11,8 @@ import store from './store'
 import 'normalize.css'
 import '@/assets/styles/common.less'
 
+// 导入封装的插件库
+import plugins from './components/library'
+
 // 创建Vue应用并使用Vuex和路由，然后挂载到#app中
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).use(store).use(router).use(plugins).mount('#app')
