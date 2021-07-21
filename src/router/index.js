@@ -6,6 +6,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Layout from '@/views/Layout'
 import Home from '@/views/Home'
+import TopCategory from '@/views/Category/index'
+import SubCategory from '@/views/Category/sub'
 // 路由配置 - 映射关系表
 const routes = [
   {
@@ -15,6 +17,14 @@ const routes = [
       {
         path: '/',
         component: Home
+      },
+      {
+        path: 'category/:id',
+        component: TopCategory
+      },
+      {
+        path: 'category/sub/:id',
+        component: SubCategory
       }
     ]
   }

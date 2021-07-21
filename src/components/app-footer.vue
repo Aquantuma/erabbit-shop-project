@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped lang='less'>
-.app_footer {
+.app-footer {
   overflow: hidden;
   background-color: #f5f5f5;
   padding-top: 20px;

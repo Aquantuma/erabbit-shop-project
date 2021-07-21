@@ -3,8 +3,7 @@
   <AppTopnav></AppTopnav>
   <!-- 公共头部 -->
   <AppHeader></AppHeader>
-  <div>
-    main 主体 - 可以替换为首页，分类页，详情页
+  <div class="main">
     <!-- 二级路由显示区域 -->
     <router-view></router-view>
   </div>
@@ -22,5 +21,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.main{
+  height: 600px;
+}
 </style>

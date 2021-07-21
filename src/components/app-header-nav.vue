@@ -2,14 +2,14 @@
   <ul class="navs">
     <li class="home"><RouterLink to="/">首页</RouterLink></li>
     <li v-for="item in list" :key="item.id">
-      <a href="#">{{ item.name }}</a>
+      <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
       <div class="layer">
         <ul>
           <li v-for="value in item.children" :key="value.id">
-            <a href="#">
+            <RouterLink :to="`/category/sub/${value.id}`">
               <img :src="value.picture" alt="" />
               <p>{{ value.name }}</p>
-            </a>
+            </RouterLink>
           </li>
         </ul>
       </div>
