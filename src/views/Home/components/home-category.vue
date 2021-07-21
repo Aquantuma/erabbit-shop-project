@@ -19,7 +19,10 @@
     </ul>
     <!-- 弹层 -->
     <div class="layer">
-      <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
+      <h4 v-if="currList">
+        {{ currList.id === "brand" ? "品牌" : "分类" }}推荐
+        <small>根据您的购买或浏览记录推荐</small>
+      </h4>
       <ul>
         <li v-for="item in currList.goods" :key="item.id">
           <RouterLink to="/">
@@ -32,13 +35,29 @@
           </RouterLink>
         </li>
       </ul>
+      <!-- 品牌列表 -->
+      <ul v-if="currList && currList.brands && currList.brands.length">
+        <li class="brand" v-for="item in currList.brands" :key="item.id">
+          <RouterLink to="/">
+            <img :src="item.logo" alt="" />
+            <div class="info">
+              <p class="place">
+                <i class="iconfont icon-dingwei"></i>{{ item.place }}
+              </p>
+              <p class="name ellipsis">{{ item.name }}</p>
+              <p class="desc ellipsis-2">{{ item.desc }}</p>
+            </div>
+          </RouterLink>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, onUpdated } from 'vue'
+import { getHotBrands } from '@/api/category'
 export default {
   name: 'HomeCategory',
   setup () {
@@ -46,7 +65,8 @@ export default {
     const brand = reactive({
       id: 'brand',
       name: '品牌',
-      children: [{ id: 'brand-children', name: '品牌推荐' }]
+      children: [{ id: 'brand-children', name: '品牌推荐' }],
+      brands: []
     })
     const categoryId = ref(null)
     const menuList = computed(() => {
@@ -62,10 +82,18 @@ export default {
       return arr
     })
     const currList = computed(() => {
-      return menuList.value.find(item => item.id === categoryId.value) || []
+      return menuList.value.find((item) => item.id === categoryId.value) || []
     })
-    // console.log('menuList', menuList)
-    console.log('currList', currList)
+    // 获取6个品牌数据
+    getHotBrands(6).then((res) => {
+      // console.log(res)
+      brand.brands = res.result
+    })
+    // 使用onUpdated钩子函数打印检查数据，数据改变时会自动触发onUpdated
+    onUpdated(() => {
+      console.log('categoryId', categoryId.value)
+      console.log('currList', currList.value)
+    })
     return { menuList, brand, categoryId, currList }
   }
 }
@@ -156,6 +184,24 @@ export default {
               color: @priceColor;
               i {
                 font-size: 16px;
+              }
+            }
+          }
+        }
+        &.brand {
+          height: 180px;
+          a {
+            align-items: flex-start;
+            img {
+              width: 120px;
+              height: 160px;
+            }
+            .info {
+              p {
+                margin-top: 8px;
+              }
+              .place {
+                color: #999;
               }
             }
           }
