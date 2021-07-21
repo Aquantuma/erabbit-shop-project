@@ -1,19 +1,21 @@
 <template>
-  <div class="xtx-home-page">
-    <h1>主页的内容<i class="iconfont icon-backtop"></i></h1>
+  <div class="page-home">
+    <div class="home-entry">
+      <div class="container">
+        <!-- 左侧分类 -->
+        <HomeCategory></HomeCategory>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import HomeCategory from './components/home-category.vue'
 export default {
-  name: 'xtx-home-page'
+  name: 'PageHome',
+  components: { HomeCategory }
 }
 </script>
 
 <style lang="less" scoped>
-h1 {
-  background-color: @xtxColor;
-  // 鼠标移入添加阴影
-  .hoverShadow();
-}
 </style>
