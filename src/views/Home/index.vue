@@ -10,16 +10,19 @@
     </div>
     <!-- 新鲜好物 -->
     <HomeNew></HomeNew>
+    <!-- 人气推荐 -->
+    <HomeHot></HomeHot>
   </div>
 </template>
 
 <script>
+import HomeHot from './components/home-hot.vue'
 import HomeBanner from './components/home-banner.vue'
 import HomeCategory from './components/home-category.vue'
 import HomeNew from './components/home-new.vue'
 export default {
   name: 'PageHome',
-  components: { HomeCategory, HomeBanner, HomeNew }
+  components: { HomeCategory, HomeBanner, HomeNew, HomeHot }
 }
 </script>
 
