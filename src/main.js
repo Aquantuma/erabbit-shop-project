@@ -2,6 +2,9 @@
 import { createApp } from 'vue'
 // 导入根组件
 import App from './App.vue'
+// import App from '@/test/01-测试动画效果'
+// import App from '@/test/02-检测目标元素的可见性'
+
 // 导入路由
 import router from './router'
 // 导入Vuex
