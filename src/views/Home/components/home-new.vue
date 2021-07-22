@@ -2,16 +2,19 @@
   <div class="home-new">
     <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
       <template #right><XtxMore path="/" /></template>
-      <!-- 面板内容 -->
-      <ul class="goods-list">
-        <li v-for="item in goods" :key="item.id">
-          <RouterLink :to="`/product/${item.id}`">
-            <img :src="item.picture" alt="" />
-            <p class="name ellipsis">{{ item.name }}</p>
-            <p class="price">&yen;{{ item.price }}</p>
-          </RouterLink>
-        </li>
-      </ul>
+      <Transition name="fade">
+        <!-- 面板内容 -->
+        <ul class="goods-list" v-if="goods.length">
+          <li v-for="item in goods" :key="item.id">
+            <RouterLink :to="`/product/${item.id}`">
+              <img :src="item.picture" alt="" />
+              <p class="name ellipsis">{{ item.name }}</p>
+              <p class="price">&yen;{{ item.price }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+        <HomeSkeleton v-else></HomeSkeleton>
+      </Transition>
     </HomePanel>
   </div>
 </template>
@@ -19,9 +22,10 @@
 import { ref } from 'vue'
 import HomePanel from './home-panel'
 import { findNew } from '@/api/home'
+import HomeSkeleton from './home-skeleton'
 export default {
   name: 'HomeNew',
-  components: { HomePanel },
+  components: { HomePanel, HomeSkeleton },
   setup () {
     const goods = ref([])
     findNew().then((data) => {
