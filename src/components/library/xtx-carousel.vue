@@ -1,12 +1,14 @@
 <template>
   <div class="xtx-carousel">
     <ul class="carousel-body">
-      <li class="carousel-item fade">
-        <RouterLink to="/">
-          <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
-            alt=""
-          />
+      <li
+        class="carousel-item"
+        v-for="(item, index) in banners"
+        :key="item.id"
+        :class="{ fade: currIdx === index }"
+      >
+        <RouterLink :to="item.hrefUrl">
+          <img :src="item.imgUrl" alt="" />
         </RouterLink>
       </li>
     </ul>
@@ -17,14 +19,25 @@
       ><i class="iconfont icon-angle-right"></i
     ></a>
     <div class="carousel-indicator">
-      <span v-for="i in 5" :key="i"></span>
+      <span v-for="(item, index) in banners" :key="index"></span>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
-  name: 'XtxCarousel'
+  name: 'XtxCarousel',
+  props: {
+    banners: {
+      type: Array,
+      default: () => []
+    }
+  },
+  setup () {
+    const currIdx = ref(0)
+    return { currIdx }
+  }
 }
 </script>
 <style scoped lang="less">

@@ -1,11 +1,20 @@
 <template>
   <div class="home-banner">
-    <XtxCarousel />
+    <XtxCarousel :banners="sliders" />
   </div>
 </template>
 <script>
+import { getBanners } from '@/api/category'
+import { ref } from 'vue'
 export default {
-  name: 'HomeBanner'
+  name: 'HomeBanner',
+  setup () {
+    const sliders = ref([])
+    getBanners().then((res) => {
+      sliders.value = res.result
+    })
+    return { sliders }
+  }
 }
 </script>
 <style scoped lang="less">
