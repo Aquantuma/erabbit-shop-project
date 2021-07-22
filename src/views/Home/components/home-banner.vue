@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { getBanners } from '@/api/category'
+import { getBanners } from '@/api/home'
 import { ref } from 'vue'
 export default {
   name: 'HomeBanner',
