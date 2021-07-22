@@ -96,8 +96,8 @@ export default {
     })
     // 使用onUpdated钩子函数打印检查数据，数据改变时会自动触发onUpdated
     onUpdated(() => {
-      console.log('categoryId', categoryId.value)
-      console.log('currList', currList.value)
+      // console.log('categoryId', categoryId.value)
+      // console.log('currList', currList.value)
     })
     return { menuList, brand, categoryId, currList }
   }

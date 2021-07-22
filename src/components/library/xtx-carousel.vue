@@ -1,5 +1,5 @@
 <template>
-  <div class="xtx-carousel">
+  <div class="xtx-carousel" @mouseenter="stop" @mouseleave="start">
     <ul class="carousel-body">
       <li
         class="carousel-item"
@@ -13,30 +13,87 @@
       </li>
     </ul>
     <a href="javascript:;" class="carousel-btn prev"
-      ><i class="iconfont icon-angle-left"></i
+      ><i class="iconfont icon-angle-left" @click="toggle(-1)"></i
     ></a>
-    <a href="javascript:;" class="carousel-btn next"
+    <a href="javascript:;" class="carousel-btn next" @click="toggle(1)"
       ><i class="iconfont icon-angle-right"></i
     ></a>
     <div class="carousel-indicator">
-      <span v-for="(item, index) in banners" :key="index"></span>
+      <span
+        v-for="(item, index) in banners"
+        :key="index"
+        :class="{ active: currIdx === index }"
+        @click="currIdx = index"
+        v-show="banners.length > 1"
+      ></span>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onUnmounted, watch } from 'vue'
 export default {
   name: 'XtxCarousel',
   props: {
     banners: {
       type: Array,
       default: () => []
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    duration: {
+      type: Number,
+      default: 2000
     }
   },
-  setup () {
+  setup (props) {
     const currIdx = ref(0)
-    return { currIdx }
+    // 左右箭头换图
+    const toggle = (n) => {
+      const temp = currIdx.value + n
+      if (temp > props.banners.length - 1) {
+        currIdx.value = 0
+        return
+      }
+      if (temp < 0) {
+        currIdx.value = props.banners.length - 1
+        return
+      }
+      currIdx.value = temp
+    }
+    let timer = null
+    // 自动播放函数
+    const autoPlayFn = () => {
+      // 防止启动多个定时器
+      if (timer) clearInterval(timer)
+      timer = setInterval(() => {
+        console.log('定时器被调用了')
+        toggle(1)
+      }, props.duration)
+    }
+    // 监听传入轮播图数组的变化，轮播图数量大于1才调用自动轮播
+    watch(
+      () => props.banners,
+      () => {
+        if (props.banners.length > 1 && props.autoplay) {
+          autoPlayFn()
+        }
+      }
+    )
+    // 鼠标移入清理定时器，移出重启定时器
+    const start = () => {
+      autoPlayFn()
+    }
+    const stop = () => {
+      clearInterval(timer)
+    }
+    // 组件销毁清理定时器
+    onUnmounted(() => {
+      clearInterval(timer)
+    })
+    return { currIdx, toggle, start, stop }
   }
 }
 </script>
