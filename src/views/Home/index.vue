@@ -12,17 +12,20 @@
     <HomeNew></HomeNew>
     <!-- 人气推荐 -->
     <HomeHot></HomeHot>
+    <!-- 热门品牌 -->
+    <HomeBrand></HomeBrand>
   </div>
 </template>
 
 <script>
-import HomeHot from './components/home-hot.vue'
-import HomeBanner from './components/home-banner.vue'
+import HomeHot from './components/home-hot'
+import HomeBanner from './components/home-banner'
 import HomeCategory from './components/home-category.vue'
 import HomeNew from './components/home-new.vue'
+import HomeBrand from './components/home-brand'
 export default {
   name: 'PageHome',
-  components: { HomeCategory, HomeBanner, HomeNew, HomeHot }
+  components: { HomeCategory, HomeBanner, HomeNew, HomeHot, HomeBrand }
 }
 </script>
 

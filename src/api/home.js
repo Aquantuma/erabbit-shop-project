@@ -14,3 +14,8 @@ export const findNew = () => {
 export const findHot = () => {
   return request('home/hot', 'get')
 }
+
+// 首页-热门品牌  默认请求十条数据
+export const findBrand = (limit = 10) => {
+  return request('/home/brand', 'get', { limit: limit })
+}
